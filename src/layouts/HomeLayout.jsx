@@ -1,11 +1,14 @@
-import { Outlet } from "react-router-dom";
-import Header from "../components/Header";
-import LatestNews from "../components/LatestNews";
-import LeftNavbar from "../components/layout-component/LeftNavbar";
-import RightNav from "../components/layout-component/RightNav";
-import Navbar from "../components/Navbar";
+import { Outlet, useLoaderData } from 'react-router-dom';
+import Header from '../components/Header';
+import LatestNews from '../components/LatestNews';
+import LeftNavbar from '../components/layout-component/LeftNavbar';
+import RightNav from '../components/layout-component/RightNav';
+import Navbar from '../components/Navbar';
+import NewsCard from '../components/NewsCard';
 
 const HomeLayout = () => {
+  const newsPage = useLoaderData();
+
   return (
     <div className="font-poppins">
       <header>
@@ -22,7 +25,10 @@ const HomeLayout = () => {
           <LeftNavbar></LeftNavbar>
         </aside>
         <section className="col-span-6">
-          <Outlet></Outlet>
+          {/* <Outlet></Outlet> */}
+          {newsPage.map((aNews) => (
+            <NewsCard key={aNews._id} news={aNews}></NewsCard>
+          ))}
         </section>
         <aside className="col-span-3">
           <RightNav></RightNav>
